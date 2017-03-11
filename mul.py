@@ -19,13 +19,17 @@ def log(lq):
   while True:
     msg=lq.get()
     print msg
+    if msg=='quit':
+      fp.close()
+      break
+      
     try:
       fp.write(str(msg)+"\r\n")
       fp.flush()
-    except IOError,e:
-      print '************'
-      print e
-      print '************'
+    except:
+      _,_,exc_tb=sys.exc_info()
+      for fname,lnum,funcname,ss in traceback.extract_tb(exc_tb):
+        lq.put(fname+":"+str(lnum)+":"+funcname+":"+ss)
 
 class tip:
   __word={"-h":'',"-d":''}
@@ -142,11 +146,14 @@ class mul:
     for v in result:
         v.join()
 
+    mq.close()
     print "work process done."
 
-    logp.terminate()
+    lq.put('quit')
 
     print "log process done."
+
+    lq.close()
 
  
     
