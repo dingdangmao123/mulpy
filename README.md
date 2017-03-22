@@ -1,3 +1,4 @@
-##python multiprocessing frame
+##基于Multiprocessing模块的Python 多进程任务框架
 
-> 基于python装饰器路由,多进程模式
+### 通过mulprocessing模块的Queue队列进行数据传递
+### 基于python装饰器路由,Q
